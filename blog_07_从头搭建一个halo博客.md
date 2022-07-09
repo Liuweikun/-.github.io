@@ -81,14 +81,11 @@ fastcgi_params.default  mime.types.default  scgi_params.default
 
 [root@VM-20-7-centos conf]# vim nginx.conf
 
-upstream blog{
-        server 127.0.0.1:8090;
-    }
-
-    server {
+server {
         listen       80;
-        server_name  localhost;
-
+        listen       [::]:80;
+        server_name  baixiaochun.xyz;             #写你网站的域名
+        client_max_body_size  1024m;            #上传速度解除默认的1m
         #charset koi8-r;
 
         #access_log  logs/host.access.log  main;
@@ -99,7 +96,7 @@ upstream blog{
             proxy_set_header X-Forwarded-Proto $scheme;
             proxy_set_header X-Real-IP $remote_addr;
             proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-
+            
         }
 ```
 
